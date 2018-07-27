@@ -25,23 +25,38 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        ListNode * pInit = new ListNode(0);
-        pInit->next = head;
-        ListNode * pCur = pInit;
-        while (pCur->next != NULL)
+        ListNode * pInit = NULL;
+        ListNode * pCur = NULL;
+        while (head != NULL)
         {
-            if (pCur->next->val == val)
+            if (head->val == val)
             {
-                ListNode * pTmp = pCur->next;
-                pCur->next = pCur->next->next;
+                // 去掉该节点
+                ListNode * pTmp = head;
+                head = head->next;
                 delete pTmp;
-                if (head == pCur)
             }
             else
             {
-                pCur = pCur->next;
+                // 把该节点加到pInit中
+                if (pInit == NULL)
+                {
+                    pInit = head;
+                    pCur = pInit;
+                    head = head->next;
+                    pInit->next = NULL;
+                }
+                else
+                {
+                    // 直接追加到pInit末尾
+                    pCur->next = head;
+                    head = head->next;
+                    pCur = pCur->next;
+                    pCur->next = NULL;
+                }
             }
         }
+        return pInit;
     }
 };
 ```
