@@ -118,3 +118,44 @@ public:
     }
 };
 ```
+
+**这里还有一种方法：**由于两个链表相交后面的节点会完全重合（跟几何的两条线相交还略有不同）。所以我们完全可以比较两条的链表的长度差，然后让较长链表向前迭代长度差个单位。代码如下：
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *p=headA,*q=headB;
+        int lenA=0,lenB=0;
+        while(p){
+            p=p->next;
+            lenA++;
+        }
+        while(q){
+            q=q->next;
+            lenB++;
+        }
+        p=headA;q=headB;
+        if(lenA>=lenB){
+            for(int i=0;i<lenA-lenB;i++)
+                p=p->next;
+        }else{
+            for(int i=0;i<lenB-lenA;i++)
+                q=q->next;            
+        }
+        while(p!=NULL&&q!=NULL&&p!=q){
+            p=p->next;
+            q=q->next;
+        }
+        if(p==NULL||q==NULL)return NULL;
+        if(p==q)return p;
+    }
+};
+```
