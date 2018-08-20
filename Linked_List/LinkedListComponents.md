@@ -1,5 +1,7 @@
 # Linked List Components
 
+@(算法)
+
 We are given `head`, the head node of a linked list containing **unique integer values.**
 
 We are also given the list `G`, a subset of the values in the linked list.
