@@ -20,6 +20,13 @@
 
 这道题目想了好久，不会做，上网看了下答案，有这个最长公共子序列的东西，然后使用动态规划，题目要求的步数就是word1 + word2 - 2 * lcs。之前上大学有印象的看过这个东西，但是现在完全忘记了，只好后面慢慢积累。
 
+本题的dp公式：
++ `dp[i][0] = 0 (0 <= i <= word1.length)`；
++ `dp[0][j] = 0 (0 <= j <= word2.length)`；
++  `if(word1[i] == word2[j]) dp[i][j] = dp[i - 1][j - 1] + 1（1 <= i <= word1.length， 1 <= j <= word2.length）`；
++  `if(word1[i] ！= word2[j]) dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])（1 <= i <= word1.length， 1 <= j <= word2.length）`；
+
+
 ```cpp
 class Solution {
 public:
